@@ -1,8 +1,5 @@
 <?php
 
-/**
- * @group wordpress
- */
 final class PhutilWordPressFuture extends FutureProxy {
 
   private $future;
@@ -72,15 +69,16 @@ final class PhutilWordPressFuture extends FutureProxy {
       throw $status;
     }
 
-    $data = json_decode($body, true);
-    if (!is_array($data)) {
-      throw new Exception("Expected JSON response from WordPress.com, ".
-                          "got: {$body}");
+    $data = phutil_json_decode($body);
+    if (empty($data)) {
+      throw new Exception(
+        pht('Expected JSON response from WordPress.com, got: %s', $body));
     }
 
     if (idx($data, 'error')) {
       $error = $data['error'];
-      throw new Exception("Received error from WordPress.com: {$error}");
+      throw new Exception(
+        pht('Received error from WordPress.com: %s', $error));
     }
 
     return $data;

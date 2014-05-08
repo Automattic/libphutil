@@ -51,8 +51,8 @@ final class PhutilAuthAdapterOAuthWordPress extends PhutilAuthAdapterOAuth {
 
   public function getExtraAuthenticateParameters() {
     return array(
-                'response_type' => 'code',
-                'blog_id' => 0,
+      'response_type' => 'code',
+      'blog_id' => 0,
     );
   }
 
